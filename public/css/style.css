@@ -60,11 +60,11 @@ body {
 }
 .header__top-search-text::-webkit-search-cancel-button {
     -webkit-appearance: none; /* Удаление стандартного внешнего вида */
-    height: 25px; /* Высота крестика */
-    width: 25px; /* Ширина крестика */
-    background: url('/public/images/cross ico.svg') no-repeat center center; /* Использование пользовательского изображения */
-    color: #A5A6A8;
+    height: 25px; 
+    width: 25px; 
+    background:  url('/public/images/cross\ ico.ico') no-repeat center center;
+    
 
     background-size: contain; /* Масштабирование изображения */
-    cursor: cell; /* Изменение курсора на указатель */
+    cursor: cell; 
 }
