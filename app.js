@@ -2,9 +2,9 @@ require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
+const newsRouter = require('./src/routes/news.routes')
 
 const app = express();
-const router = express.Router();
 
 app.use(express.static('public'));
 
