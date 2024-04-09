@@ -1,12 +1,14 @@
-var express = require('express');
+const express = require('express');
+const path = require('path');
 
+const port = 3000;
 const app = express();
 const router = express.Router();
 
 app.use(express.static('public'));
 
-app.use('/', function (_, response) {
-  response.redirect('/pages/main.html');
+app.use('/', function(_, res) {
+  res.redirect('pages/main.html');
 });
 
-app.listen(5000, () => console.log('Сервер запущен... (port: 5000)'));
+app.listen(port, () => console.log('Сервер запущен... (port: 5000)'));
