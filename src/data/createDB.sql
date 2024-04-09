@@ -1,17 +1,35 @@
 use newsApp
 
-CREATE TABLE Role (
-
+CREATE TABLE IF NOT EXISTS [Role] (
+    ID SERIALIZABLE,
+    [name] VARCHAR(20),
+    PRIMARY KEY (ID)
 )
 
-CREATE TABLE News (
-
+CREATE TABLE IF NOT EXISTS User (
+    login VARCHAR(20),
+    fullName VARCHAR(50) NOT NULL,
+    roleID INT NOT NULL,
+    avatarUrl VARCHAR(255),
+    PRIMARY KEY (login),
+    FOREIGN KEY (roleID) REFERENCES [Role] (ID)
 )
 
-CREATE TABLE Event (
-
+CREATE TABLE IF NOT EXISTS News (
+    ID SERIALIZABLE,
+    title VARCHAR(255) NOT NULL,
+    imageUrl VARCHAR(255),
+    [timeStamp] TIMESTAMP DEFAULT NOW(),
+    authorID INT NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (authorID) REFERENCES User (ID)
 )
 
-CREATE TABLE User (
-
+CREATE TABLE IF NOT EXISTS [Event] (
+    ID SERIALIZABLE,
+    title VARCHAR(255) NOT NULL,
+    [timeStamp] TIMESTAMP DEFAULT NOW(),
+    authorID INT NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (authorID) REFERENCES User (ID)
 )
