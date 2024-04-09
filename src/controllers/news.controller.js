@@ -5,6 +5,9 @@ class NewsController {
     async getNews(req, res) {
         /* TODO */
     }
+    async getOneNews(req, res) {
+        /* TODO */
+    }
     async updateNews(req, res) {
         /* TODO */
     }
