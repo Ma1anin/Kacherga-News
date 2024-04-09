@@ -27,7 +27,6 @@ body {
     margin: 14px 0;
 }
 
-.search-btn {}
 
 .header__top-search-Logo {
     margin-left: 17px;
@@ -57,4 +56,15 @@ body {
     color: #A5A6A8;
     font-family: Kamerik-105-Cyrillic;
     font-weight: 400;
+    cursor: wait;
+}
+.header__top-search-text::-webkit-search-cancel-button {
+    -webkit-appearance: none; /* Удаление стандартного внешнего вида */
+    height: 25px; /* Высота крестика */
+    width: 25px; /* Ширина крестика */
+    background: url('/public/images/cross ico.svg') no-repeat center center; /* Использование пользовательского изображения */
+    color: #A5A6A8;
+
+    background-size: contain; /* Масштабирование изображения */
+    cursor: cell; /* Изменение курсора на указатель */
 }
