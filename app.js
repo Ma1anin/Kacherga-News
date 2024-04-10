@@ -10,12 +10,11 @@ const app = express();
 
 app.use(express.static('public'));
 
-// app.use('/', function(_, res) {
-//   res.redirect('pages/main.html');
-// });
+app.set('view engine', 'hbs');
+app.set('views', 'public/views');
 
 app.use(function (req, res) {
-  res.sendFile(__dirname + '/public/pages/main.html');
+  res.render('main.hbs');
 });
 
 app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`));
