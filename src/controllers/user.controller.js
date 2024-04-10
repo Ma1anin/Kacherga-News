@@ -37,6 +37,18 @@ class UserController {
       throw err;
     }
   }
+  async updateUserRole(req, res) {
+    const {roleID, id} = req.body;
+    const query = `UPDATE User SET roleID = $1 WHERE login = $2 RETURNING *`;
+
+    try {
+      const res = await db.query(query, [roleID, id]);
+      return res.rows[0];
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
   async deleteUser(req, res) {
     const login = req.params.login;
     const query = `DELETE FROM User WHERE login = $1`;

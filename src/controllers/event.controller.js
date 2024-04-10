@@ -2,11 +2,11 @@ const db = require("../data/db");
 
 class EventController {
   async createEvent(req, res) {
-    const { title, authorID } = req.body;
-    const query = "INSERT INTO Event (title, authorID) VALUES ($1, $2) RETURNING *";
+    const { title, description, authorID } = req.body;
+    const query = "INSERT INTO Event (title, description, authorID) VALUES ($1, $2, $3) RETURNING *";
 
     try {
-      const res = db.query(query, [title, authorID]);
+      const res = db.query(query, [title, description, authorID]);
       return res.rows[0];
     } catch (err) {
       console.log(err);
@@ -37,11 +37,11 @@ class EventController {
     }
   }
   async updateEvent(req, res) {
-    const {title, id} = req.body;
-    const query = "UPDATE Event SET title = $1 WHERE ID = $2 RETURNING *";
+    const {title, description, id} = req.body;
+    const query = "UPDATE Event SET title = $1, description = $2 WHERE ID = $2 RETURNING *";
 
     try {
-      const res = db.query(query, [title, id]);
+      const res = db.query(query, [title, description, id]);
       return res.rows[0];
     } catch (err) {
       console.log(err);

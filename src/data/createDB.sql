@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS User (
 
 CREATE TABLE IF NOT EXISTS News (
     ID SERIALIZABLE,
-    title VARCHAR(255) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    [description] VARCHAR(255) NOT NULL,
     imageUrl VARCHAR(255),
     [timeStamp] TIMESTAMP DEFAULT NOW(),
     authorID INT NOT NULL,
@@ -27,9 +28,14 @@ CREATE TABLE IF NOT EXISTS News (
 
 CREATE TABLE IF NOT EXISTS [Event] (
     ID SERIALIZABLE,
-    title VARCHAR(255) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    [description] VARCHAR(255) NOT NULL,
     [timeStamp] TIMESTAMP DEFAULT NOW(),
     authorID INT NOT NULL,
     PRIMARY KEY (ID),
     FOREIGN KEY (authorID) REFERENCES User (ID)
 )
+
+INSERT INTO Role ([name])
+VALUES ('admin'),
+       ('user')
