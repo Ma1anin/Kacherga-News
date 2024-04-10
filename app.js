@@ -10,8 +10,12 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.use('/', function(_, res) {
-  res.redirect('pages/main.html');
+// app.use('/', function(_, res) {
+//   res.redirect('pages/main.html');
+// });
+
+app.use(function (req, res) {
+  res.sendFile(__dirname + '/public/pages/main.html');
 });
 
 app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`));

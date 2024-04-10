@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS News (
     title VARCHAR(100) NOT NULL,
     [description] VARCHAR(255) NOT NULL,
     imageUrl VARCHAR(255),
-    [timeStamp] TIMESTAMP DEFAULT NOW(),
+    [createAt] TIMESTAMP DEFAULT NOW(),
     authorID INT NOT NULL,
     PRIMARY KEY (ID),
     FOREIGN KEY (authorID) REFERENCES User (ID)
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS [Event] (
     ID SERIALIZABLE,
     title VARCHAR(100) NOT NULL,
     [description] VARCHAR(255) NOT NULL,
-    [timeStamp] TIMESTAMP DEFAULT NOW(),
+    [createAt] TIMESTAMP DEFAULT NOW(),
     authorID INT NOT NULL,
     PRIMARY KEY (ID),
     FOREIGN KEY (authorID) REFERENCES User (ID)

@@ -6,7 +6,7 @@ class EventController {
     const query = "INSERT INTO Event (title, description, authorID) VALUES ($1, $2, $3) RETURNING *";
 
     try {
-      const res = db.query(query, [title, description, authorID]);
+      const res = await db.query(query, [title, description, authorID]);
       return res.rows[0];
     } catch (err) {
       console.log(err);
@@ -17,7 +17,7 @@ class EventController {
     const query = "SELECT * FROM Event";
 
     try {
-      const res = db.query(query);
+      const res = await db.query(query);
       return res.rows[0];
     } catch (err) {
       console.log(err);
@@ -29,7 +29,7 @@ class EventController {
     const query = "SELECT * FROM Event WHERE ID = $1";
 
     try {
-      const res = db.query(query, [id]);
+      const res = await db.query(query, [id]);
       return res.rows[0];
     } catch (err) {
       console.log(err);
@@ -41,7 +41,7 @@ class EventController {
     const query = "UPDATE Event SET title = $1, description = $2 WHERE ID = $2 RETURNING *";
 
     try {
-      const res = db.query(query, [title, description, id]);
+      const res = await db.query(query, [title, description, id]);
       return res.rows[0];
     } catch (err) {
       console.log(err);
@@ -53,7 +53,7 @@ class EventController {
     const query = "DELETE FROM Event WHERE ID = $1";
 
     try {
-      const res = db.query(query, [id]);
+      const res = await db.query(query, [id]);
       return res.rows[0];
     } catch (err) {
       console.log(err);
