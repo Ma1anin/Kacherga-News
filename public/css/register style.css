@@ -5,11 +5,7 @@ body {
     flex-direction: column;
     background-color: #080B0F;
 }
-.register__green-box {
-    width: 6px;
-    height: 22px;
-    background: #000;: #BCFD4C;
-}
+
 
 
 h1 {
@@ -20,6 +16,20 @@ h1 {
     font-weight: 700;
     font-size: 40px;
     color: #FFFFFF;
+}
+h2 {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.register__green-box {
+    width: 6px;
+    height: 22px;
+    background: #BCFD4C;
+    border-radius: 7px;
+    margin-right: 10px;
 }
 section {
     display: flex;
