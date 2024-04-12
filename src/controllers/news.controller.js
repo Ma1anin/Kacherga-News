@@ -1,63 +1,48 @@
-const db = require("../data/db");
+const NewsService = require("../services/news.service");
 
 class NewsController {
   async createNews(req, res) {
-    const {title, imageUrl, authorID} = req.body;
-    const query = 'INSERT INTO News (title, imageUrl, authorID) VALUES ($1, $2, $3) RETURNING *';
-
     try {
-      const res = await db.query(query, [title, imageUrl, authorID]);
-      return res.rows[0];
+      const createdNews = await NewsService.createNews(req.body);
+      return res.json(createdNews);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
+
   async getNews(req, res) {
-    const query = 'SELECT * FROM News';
-
     try {
-      const res = await db.query(query);
-      return res.rows;
+      const news = await NewsService.getNews();
+      return res.json(news);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
+
   async getNewsById(req, res) {
-    const id = req.params.id;
-    const query = 'SELECT * FROM News WHERE ID = $1'
-
     try {
-      const res = await db.query(query, [id]);
-      return res.rows[0];
+      const news = NewsService.getNewsById(req.params.id);
+      return res.json(news);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
+
   async updateNews(req, res) {
-    const {title, imageUrl, id} = req.body;
-    const query = 'UPDATE Event SET title = $1, imageUrl = $2 WHERE ID = $3 RETURNING *'
-
     try {
-      const res = await db.query(query, [title, imageUrl, id]);
-      return res.rows[0];
+      const updatedNews = NewsService.updateNews(req.body);
+      return res.json(updatedNews);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
-  async deleteNews(req, res) {
-    const id = req.params.id;
-    const query = 'DELETR FROM News WHERE ID = $1'
 
+  async deleteNews(req, res) {
     try {
-      const res = await db.query(query, [id]);
-      return res.rows[0];
+      const deletedNews = NewsService.deleteNews(req.params.id);
+      return res.json(deletedNews);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
 }

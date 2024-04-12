@@ -1,25 +1,28 @@
-import Event from "../models/Event.js";
+const Event =  require("../models/Event.js");
 
 class EventService {
   async createEvent(event) {
     return await Event.create(event);
   }
 
-  async getEvent() {
+  async getEvents() {
     return await Event.find();
   }
 
-  async getEventById(id) {
-    return await Event.findById(id);
+  async getEventById(_id) {
+    if (!_id) throw new Error('The ID is not specified');
+    return await Event.findById(_id);
   }
 
-  async updateEvent(id, event) {
-    return await Event.findByIdAndUpdate(id, event);
+  async updateEvent(event) {
+    if (!event._id) throw new Error('The ID is not specified');
+    return await Event.findByIdAndUpdate(event._id, event);
   }
 
-  async deleteEvent(id, event) {
-    return await Event.findByIdAndDelete(id, event);
+  async deleteEvent(event) {
+    if (!event._id) throw new Error('The ID is not specified');
+    return await Event.findByIdAndDelete(event._id, event);
   }
 }
 
-export default new EventService();
+module.exports = new EventService();

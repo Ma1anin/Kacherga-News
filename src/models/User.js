@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const User = new mongoose.Schema({
     login: {type: String, required: true},
@@ -7,4 +7,4 @@ const User = new mongoose.Schema({
     avatar: {type: String}
 });
 
-export default mongoose.model('User', User);
+module.exports = mongoose.model('User', User);

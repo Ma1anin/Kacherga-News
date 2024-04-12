@@ -1,63 +1,48 @@
-const db = require("../data/db");
+const EventService = require("../services/event.service");
 
 class EventController {
   async createEvent(req, res) {
-    const { title, description, authorID } = req.body;
-    const query = "INSERT INTO Event (title, description, authorID) VALUES ($1, $2, $3) RETURNING *";
-
     try {
-      const res = await db.query(query, [title, description, authorID]);
-      return res.rows[0];
+      const createdEvent = await EventService.createEvent(req.body);
+      return res.json(createdEvent);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
+
   async getEvents(req, res) {
-    const query = "SELECT * FROM Event";
-
     try {
-      const res = await db.query(query);
-      return res.rows[0];
+      const events = await EventService.getEvents();
+      return res.json(events);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
+
   async getEventById(req, res) {
-    const id = req.params.id;
-    const query = "SELECT * FROM Event WHERE ID = $1";
-
     try {
-      const res = await db.query(query, [id]);
-      return res.rows[0];
+      const event = EventService.getEventById(req.params.id);
+      return res.json(event);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
+
   async updateEvent(req, res) {
-    const {title, description, id} = req.body;
-    const query = "UPDATE Event SET title = $1, description = $2 WHERE ID = $2 RETURNING *";
-
     try {
-      const res = await db.query(query, [title, description, id]);
-      return res.rows[0];
+      const updatedEvent = EventService.updateEvent(req.body);
+      return res.json(updatedEvent);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
-  async deleteEvent(req, res) {
-    const id = req.params.id;
-    const query = "DELETE FROM Event WHERE ID = $1";
 
+  async deleteEvent(req, res) {
     try {
-      const res = await db.query(query, [id]);
-      return res.rows[0];
+      const deletedEvent = EventService.deleteEvent(req.params.id);
+      return res.json(deletedEvent);
     } catch (err) {
-      console.log(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
 }

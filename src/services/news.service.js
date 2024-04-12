@@ -1,4 +1,4 @@
-import News from "../models/News.js";
+const News = require("../models/News.js");
 
 class NewsService {
   async createNews(news, picture) {
@@ -9,17 +9,20 @@ class NewsService {
     return await News.find();
   }
 
-  async getNewsById(id) {
-    return await News.findById(id);
+  async getNewsById(_id) {
+    if (!_id) throw new Error('The ID is not specified');
+    return await News.findById(_id);
   }
 
-  async updateNews(id, news) {
-    return await News.findByIdAndUpdate(id, news);
+  async updateNews(news) {
+    if (!news._id) throw new Error('The ID is not specified');
+    return await News.findByIdAndUpdate(news._id, news, {new: true});
   }
 
-  async deleteNews(id, news) {
-    return await News.findByIdAndDelete(id, news);
+  async deleteNews(news) {
+    if (!news._id) throw new Error('The ID is not specified');
+    return await News.findByIdAndDelete(news._id, news);
   }
 }
 
-export default new NewsService();
+module.exports = new NewsService();

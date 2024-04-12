@@ -1,16 +1,15 @@
 require("dotenv").config();
 
-import mongoose from 'mongoose';
-
+const mongoose = require('mongoose');
 const express = require("express");
-const path = require("path");
-const newsRouter = require("./src/routes/news.routes");
+const newsRouter = require("./src/routes/news.routes.js");
 const eventRouter = require("./src/routes/event.routes");
 const userRouter = require("./src/routes/user.routes");
 
 const app = express();
 
 app.use(express.static("public"));
+app.use(express.json());
 app.use("/news", newsRouter);
 app.use("/event", eventRouter);
 app.use("/user", userRouter);
@@ -18,9 +17,13 @@ app.use("/user", userRouter);
 app.set("view engine", "hbs");
 app.set("views", "public/views");
 
-app.use(function (req, res) {
-  res.render("main.hbs");
-});
+// app.get('/register', function (req, res) {
+//   res.render("register.hbs");
+// });
+
+// app.get('/', function (req, res) {
+//   res.render("main.hbs");
+// });
 
 async function startApp() {
   try {

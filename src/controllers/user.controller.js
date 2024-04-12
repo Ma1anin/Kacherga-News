@@ -1,66 +1,42 @@
-const db = require('../data/db');
+const UserService = require("../services/user.service");
 
 class UserController {
   async createUser(req, res) {
-    const {login, name, role} = req.body;
-    const query = `INSERT INTO User (login, name, role) VALUES ($1, $2, $3) RETURNING *`;
-
     try {
-      const res = await db.query(query, [login, name, role]);
-      return res.rows[0];
+      const createdUser = await UserService.createUser(req.body);
+      return res.json(createdUser);
     } catch (err) {
-      console.error(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
-  async getUserByLogin(req, res) {
-    const login = req.params.login;
-    const query = `SELECT * FROM User WHERE login = $1`;
 
+  async getUserById(req, res) {
     try {
-      const res = await db.query(query, [login]);
-      return res.rows[0];
+      const user = UserService.getUserById(req.params.id);
+      return res.json(user);
     } catch (err) {
-      console.error(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
+
   async updateUser(req, res) {
-    const {login, fullName, avatarUrl} = req.body;
-    const query = `UPDATE User SET login = $1, fullName = $2, avatarUrl = $3 WHERE login = $1 RETURNING *`;
-
     try {
-      const res = await db.query(query, [login, fullName, avatarUrl]);
-      return res.rows[0];
+      const updatedUser = UserService.updateUser(req.body);
+      return res.json(updatedUser);
     } catch (err) {
-      console.error(err);
-      throw err;
+      res.status(500).json(err);
     }
   }
-  async updateUserRole(req, res) {
-    const {roleID, id} = req.body;
-    const query = `UPDATE User SET roleID = $1 WHERE login = $2 RETURNING *`;
 
-    try {
-      const res = await db.query(query, [roleID, id]);
-      return res.rows[0];
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  }
   async deleteUser(req, res) {
-    const login = req.params.login;
-    const query = `DELETE FROM User WHERE login = $1`;
-
     try {
-        const res = await db.query(query, [login]);
-        return res.rows[0];
+      const deletedUser = UserService.deleteUser(req.params.id);
+      return res.json(deletedUser);
     } catch (err) {
-        console.log(err);
-        throw err;
+      res.status(500).json(err);
     }
   }
 }
+
 
 module.exports = new UserController();
