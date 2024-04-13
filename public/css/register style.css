@@ -11,9 +11,9 @@ body {
     flex-direction: row;
     align-items: center;
     margin-bottom: 20px;
-    
+
     /* flex-wrap: nowrap; */
-    
+
 }
 
 .logo-register {
@@ -78,6 +78,8 @@ section {
 
 
 
+
+
 .form__button {
     display: flex;
     justify-content: center;
@@ -95,6 +97,12 @@ section {
     background: #bcfd4c;
     color: #080b0f;
     /* margin-left: 95px; */
+    transition: 0.9s;
+}
+
+.button:hover {
+    box-shadow: 0 0 10px #c1f862;
+    transform: scale(1.1);
 }
 
 .have-login {
@@ -113,8 +121,4 @@ a {
     font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
     font-size: 12px;
-
 }
-
-
-.main_login {}
