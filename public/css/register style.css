@@ -6,24 +6,41 @@ body {
     background-color: #080B0F;
 }
 
+.logo-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    /* flex-wrap: nowrap; */
+    
+}
 
+.logo-register {
+    width: 70px;
+    margin-right: 20px;
+}
 
 h1 {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
     font-size: 40px;
     color: #FFFFFF;
 }
+
 h2 {
     display: flex;
     align-items: center;
+    margin-bottom: 26px;
+    font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
     font-size: 16px;
     color: #FFFFFF;
 }
+
 .register__green-box {
     width: 6px;
     height: 22px;
@@ -31,6 +48,7 @@ h2 {
     border-radius: 7px;
     margin-right: 10px;
 }
+
 section {
     display: flex;
     justify-content: center;
@@ -45,8 +63,58 @@ section {
     background-color: #212327;
 }
 
-
-
-.main_login {
-    
+.form__input {
+    width: 290px;
+    height: 38px;
+    margin-bottom: 20px;
+    padding-left: 16px;
+    border-radius: 10px;
+    background: #37393c;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 400;
+    font-size: 12px;
+    color: #a5a6a8;
 }
+
+
+
+.form__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.button {
+    border-radius: 6px;
+    width: 91px;
+    height: 28px;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1.15px;
+    background: #bcfd4c;
+    color: #080b0f;
+    /* margin-left: 95px; */
+}
+
+.have-login {
+    margin-top: 13px;
+}
+
+p {
+    color: #fff;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+a {
+    color: #BCFD4C;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 12px;
+
+}
+
+
+.main_login {}
