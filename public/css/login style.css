@@ -6,20 +6,6 @@ body {
     background-color: #080B0F;
 }
 
-.logo-text {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 20px;
-
-    /* flex-wrap: nowrap; */
-
-}
-
-.logo-login {
-    width: 70px;
-    margin-right: 20px;
-}
 
 h1 {
     display: flex;
@@ -93,7 +79,6 @@ section {
     font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
     font-size: 16px;
-    letter-spacing: 1.15px;
     background: #bcfd4c;
     color: #080b0f;
     /* margin-left: 95px; */
