@@ -1,4 +1,4 @@
-const News = require("../models/News.js");
+const News = require("../models/News");
 
 class NewsService {
   async createNews(news, picture) {
@@ -19,9 +19,9 @@ class NewsService {
     return await News.findByIdAndUpdate(news._id, news, {new: true});
   }
 
-  async deleteNews(news) {
-    if (!news._id) throw new Error('The ID is not specified');
-    return await News.findByIdAndDelete(news._id, news);
+  async deleteNews(_id) {
+    if (!_id) throw new Error('The ID is not specified');
+    return await News.findByIdAndDelete(_id);
   }
 }
 

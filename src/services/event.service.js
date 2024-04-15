@@ -1,4 +1,4 @@
-const Event =  require("../models/Event.js");
+const Event = require("../models/Event");
 
 class EventService {
   async createEvent(event) {
@@ -16,12 +16,12 @@ class EventService {
 
   async updateEvent(event) {
     if (!event._id) throw new Error('The ID is not specified');
-    return await Event.findByIdAndUpdate(event._id, event);
+    return await Event.findByIdAndUpdate(event._id, event, {new: true});
   }
 
-  async deleteEvent(event) {
-    if (!event._id) throw new Error('The ID is not specified');
-    return await Event.findByIdAndDelete(event._id, event);
+  async deleteEvent(_id) {
+    if (!_id) throw new Error('The ID is not specified');
+    return await Event.findByIdAndDelete(_id);
   }
 }
 
