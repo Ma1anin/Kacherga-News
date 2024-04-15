@@ -63,7 +63,7 @@ body {
     color: #A5A6A8;
     font-family: Kamerik-105-Cyrillic;
     font-weight: 400;
-    cursor: grab;
+    cursor: auto;
 }
 .header__top-search-text::-webkit-search-cancel-button {
     -webkit-appearance: none; /* Удаление стандартного внешнего вида */
