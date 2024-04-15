@@ -74,8 +74,10 @@ section {
 
 .button {
     border-radius: 6px;
-    width: 91px;
-    height: 28px;
+    min-width: 91px;
+    /* width: auto; */
+    min-height: 28px;
+    /* height: auto; */
     font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
     font-size: 16px;
