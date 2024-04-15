@@ -27,11 +27,11 @@ npm install
 3. Запусти сервер командой:
 > В режиме разработчика
 ```
-npm run dev
+npm run start:dev
 ```
 > В режиме пользователя
 ```
-npm run prod
+npm run start:prod
 ```
 
 > [!TIP]
