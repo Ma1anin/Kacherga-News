@@ -76,7 +76,7 @@ body {
     cursor: pointer; 
 }
 
-.header__profile {
+/* .header__profile {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,14 +84,14 @@ body {
     right: 14px;
     width: 160px;
     height: 30px; 
-}
+} */
 .profile__buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: auto;
-    width: 160px;
-    height: 30px;
+    min-width: 160px;
+    min-height: 30px;
 }
 
 .profile__buttons-login {
@@ -99,11 +99,11 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    width: 76px;
+    width: 100px;
     height: 28px;
     font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 16px;
     background: #bcfd4c;
     color: #080b0f;
     transition: 0.9s;
@@ -120,11 +120,11 @@ body {
     justify-content: center;
     margin-right: 10px;
     border-radius: 6px;
-    width: 76px;
+    width: 100px;
     height: 28px;
     font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 16px;
     background: #080B0F;
     color: #FFFFFF;
     box-shadow: 0px 0px 0px 1px #47494D;
