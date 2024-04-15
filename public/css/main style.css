@@ -10,9 +10,11 @@ body {
 }
 
 .container {
+    display: flex;
+    align-items: center;
     min-width: auto;
     height: 66px;
-    margin: 0 23px;
+    margin: 14px 23px;
 
 }
 
@@ -22,8 +24,14 @@ body {
 
 /* -------------------header__top-inner----------------------- */
 
+.header__top {
+}
+
 .header__top-inner {
-    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    width: 1857px;
+    /* margin: 14px 0; */
 }
 
 
@@ -55,7 +63,7 @@ body {
     color: #A5A6A8;
     font-family: Kamerik-105-Cyrillic;
     font-weight: 400;
-    cursor: wait;
+    cursor: auto;
 }
 .header__top-search-text::-webkit-search-cancel-button {
     -webkit-appearance: none; /* Удаление стандартного внешнего вида */
@@ -65,5 +73,66 @@ body {
     
 
     background-size: contain; /* Масштабирование изображения */
-    cursor: cell; 
+    cursor: pointer; 
+}
+
+/* .header__profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 14px;
+    width: 160px;
+    height: 30px; 
+} */
+.profile__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    min-width: 160px;
+    min-height: 30px;
+}
+
+.profile__buttons-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    width: 100px;
+    height: 28px;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 16px;
+    background: #bcfd4c;
+    color: #080b0f;
+    transition: 0.9s;
+}
+
+.profile__buttons-login:hover {
+    box-shadow: 0 0 10px #c1f862;
+    transform: scale(1.1);
+}
+
+.profile__buttons-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    border-radius: 6px;
+    width: 100px;
+    height: 28px;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 16px;
+    background: #080B0F;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 0px 1px #47494D;
+    transition: 0.9s;
+}
+
+.profile__buttons-register:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 5px 1px #7c7f85;
+
 }
