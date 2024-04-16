@@ -1,4 +1,4 @@
-const User = require("../models/User.js");
+const User = require("../models/User");
 
 class UserService {
   async createUser(user, picture) {
@@ -12,12 +12,12 @@ class UserService {
 
   async updateUser(user) {
     if (!user._id) throw new Error('The ID is not specified');
-    return await User.findByIdAndUpdate(user._id, user);
+    return await User.findByIdAndUpdate(user._id, user, {new: true});
   }
 
-  async deleteUser(user) {
-    if (!user._id) throw new Error('The ID is not specified');
-    return await User.findByIdAndDelete(user._id, user);
+  async deleteUser(_id) {
+    if (!_id) throw new Error('The ID is not specified');
+    return await User.findByIdAndDelete(_id);
   }
 }
 

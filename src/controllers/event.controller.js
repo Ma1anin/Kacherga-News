@@ -21,7 +21,7 @@ class EventController {
 
   async getEventById(req, res) {
     try {
-      const event = EventService.getEventById(req.params.id);
+      const event = await EventService.getEventById(req.params.id);
       return res.json(event);
     } catch (err) {
       res.status(500).json(err);
@@ -30,7 +30,7 @@ class EventController {
 
   async updateEvent(req, res) {
     try {
-      const updatedEvent = EventService.updateEvent(req.body);
+      const updatedEvent = await EventService.updateEvent(req.body);
       return res.json(updatedEvent);
     } catch (err) {
       res.status(500).json(err);
@@ -39,7 +39,7 @@ class EventController {
 
   async deleteEvent(req, res) {
     try {
-      const deletedEvent = EventService.deleteEvent(req.params.id);
+      const deletedEvent = await EventService.deleteEvent(req.params.id);
       return res.json(deletedEvent);
     } catch (err) {
       res.status(500).json(err);

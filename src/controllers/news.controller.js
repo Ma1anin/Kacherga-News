@@ -21,7 +21,7 @@ class NewsController {
 
   async getNewsById(req, res) {
     try {
-      const news = NewsService.getNewsById(req.params.id);
+      const news = await NewsService.getNewsById(req.params.id);
       return res.json(news);
     } catch (err) {
       res.status(500).json(err);
@@ -30,7 +30,7 @@ class NewsController {
 
   async updateNews(req, res) {
     try {
-      const updatedNews = NewsService.updateNews(req.body);
+      const updatedNews = await NewsService.updateNews(req.body);
       return res.json(updatedNews);
     } catch (err) {
       res.status(500).json(err);
@@ -39,7 +39,7 @@ class NewsController {
 
   async deleteNews(req, res) {
     try {
-      const deletedNews = NewsService.deleteNews(req.params.id);
+      const deletedNews = await NewsService.deleteNews(req.params.id);
       return res.json(deletedNews);
     } catch (err) {
       res.status(500).json(err);

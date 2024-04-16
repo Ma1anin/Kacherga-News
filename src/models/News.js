@@ -4,7 +4,7 @@ const News = new mongoose.Schema({
     title: {type: String, required: true},
     content: {type: String, required: true},
     picture: {type: String},
-    creratedAt: {type: Object, required: true},
+    createdAt: {type: Object, required: true},
     authorID: {type: String, required: true}
 });
 
