@@ -3,7 +3,10 @@ const UserService = require("../services/user.service");
 class UserController {
   async createUser(req, res) {
     try {
-      const createdUser = await UserService.createUser(req.body);
+      const createdUser = await UserService.createUser(
+        req.body,
+        req.files.picture
+      );
       return res.json(createdUser);
     } catch (err) {
       res.status(500).json(err);
@@ -37,6 +40,5 @@ class UserController {
     }
   }
 }
-
 
 module.exports = new UserController();

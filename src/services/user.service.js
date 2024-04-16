@@ -1,22 +1,24 @@
 const User = require("../models/User");
+const FileService = require('../services/file.service');
 
 class UserService {
   async createUser(user, picture) {
-    return await User.create(user);
+    const fileName = FileService.saveFile(picture);
+    return await User.create({ ...user, picture: fileName });
   }
 
   async getUserById(_id) {
-    if (!_id) throw new Error('The ID is not specified');
+    if (!_id) throw new Error("The ID is not specified");
     return await User.findById(_id);
   }
 
   async updateUser(user) {
-    if (!user._id) throw new Error('The ID is not specified');
-    return await User.findByIdAndUpdate(user._id, user, {new: true});
+    if (!user._id) throw new Error("The ID is not specified");
+    return await User.findByIdAndUpdate(user._id, user, { new: true });
   }
 
   async deleteUser(_id) {
-    if (!_id) throw new Error('The ID is not specified');
+    if (!_id) throw new Error("The ID is not specified");
     return await User.findByIdAndDelete(_id);
   }
 }

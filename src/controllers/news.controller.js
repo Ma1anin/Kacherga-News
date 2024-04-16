@@ -3,7 +3,10 @@ const NewsService = require("../services/news.service");
 class NewsController {
   async createNews(req, res) {
     try {
-      const createdNews = await NewsService.createNews(req.body);
+      const createdNews = await NewsService.createNews(
+        req.body,
+        req.files.picture
+      );
       return res.json(createdNews);
     } catch (err) {
       res.status(500).json(err);
