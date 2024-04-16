@@ -1,0 +1,197 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #080B0F;
+}
+
+
+h1 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 26px;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.edit__green-box {
+    width: 6px;
+    height: 22px;
+    top: -193px;
+    position: relative;
+    background: #BCFD4C;
+    border-radius: 7px;
+    margin-right: 10px;
+}
+
+.edit__account {
+    width: 290px;
+    height: 401px;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    width: 366px;
+    min-width: 366px;
+    height: 450px;
+    min-height: 413px;
+    background-color: #212327;
+}
+
+.form__input {
+    width: 290px;
+    height: 38px;
+    margin-bottom: 20px;
+    padding-left: 16px;
+    border-radius: 10px;
+    background: #37393c;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 400;
+    font-size: 12px;
+    color: #fff;
+    
+}
+
+
+.inputbox {
+    position: relative;
+    margin: 30px 0;
+    max-width: 310px;
+    /* border-bottom: 2px solid #fff; */
+}
+
+.inputbox label {
+    position: absolute;
+    top: 32%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-family: Kamerik-105-Cyrillic;
+    font-size: 16px;
+    font-weight: 700;
+    pointer-events: none;
+    transition: all 0.5s ease-in-out;
+    
+}
+
+input:focus~label,
+input:valid~label {
+    top: -20px;
+    left: -1px;
+}
+
+.text_avatar {
+    /* margin-left: 25px; */
+    margin-bottom: 10px;
+    color: #fff;
+    font-family: Kamerik-105-Cyrillic;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 58px;
+}
+
+.avatar_default {
+    width: 60px;
+    height: 60px;
+    margin-right: 12px;
+    background:  url('/public/images/profile.svg') no-repeat center center;
+    background-size: 60px 60px;
+    transition: all 0.5s ease-in-out;
+}
+
+
+.form__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+.button_upload {
+    margin-right: 10px;
+}
+
+.button_green {
+    border-radius: 6px;
+    min-width: 91px;
+    /* width: auto; */
+    min-height: 28px;
+    /* height: auto; */
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 16px;
+    background: #bcfd4c;
+    color: #080b0f;
+    /* margin-left: 95px; */
+    transition: 0.9s;
+}
+
+.button_save:hover {
+    box-shadow: 0 0 10px #c1f862;
+    transform: scale(1.1);
+}
+
+.button_black {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    border-radius: 6px;
+    width: 100px;
+    height: 28px;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: #212327;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 0px 1px #47494D;
+    transition: 0.9s;
+}
+
+.button_cancel:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 5px 1px #7c7f85;
+
+}
+
+.have-login {
+    margin-top: 13px;
+}
+
+p {
+    color: #fff;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+a {
+    color: #BCFD4C;
+    font-family: Kamerik-105-Cyrillic;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+
