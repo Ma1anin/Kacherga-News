@@ -6,6 +6,7 @@ const fileUpload = require("express-fileupload");
 const newsRouter = require("./src/routes/news.routes");
 const eventRouter = require("./src/routes/event.routes");
 const userRouter = require("./src/routes/user.routes");
+const CardService = require("src/services/card.service");
 
 const app = express();
 
@@ -33,6 +34,16 @@ app.get("/login", function (req, res) {
 
 app.get("/", function (req, res) {
   res.render("main.hbs");
+
+  const newsContainer = document.getElementById("news-container");
+  fetch("/news")
+    .then((response) => response.json())
+    .then((news) => {
+      news.forEach((item) => {
+        const newsCard = CardService.createNewsCard(item);
+        newsContainer.appendChild(newsCard);
+      });
+    });
 });
 
 async function startApp() {
