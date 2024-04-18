@@ -1,5 +1,5 @@
-const User = require("../models/User");
-const FileService = require('../services/file.service');
+const FileService = require('@services/file.service.js');
+const User = require("@models/User.js");
 
 class UserService {
   async createUser(user, picture) {
