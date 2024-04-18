@@ -1,12 +1,9 @@
-const UserService = require("@services/user.service.js");
+const UserService = require("../services/user.service.js");
 
 class UserController {
   async createUser(req, res) {
     try {
-      const createdUser = await UserService.createUser(
-        req.body,
-        req.files.picture
-      );
+      const createdUser = await UserService.createUser(req.body);
       return res.json(createdUser);
     } catch (err) {
       res.status(500).json(err);

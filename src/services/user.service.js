@@ -1,10 +1,9 @@
-const FileService = require('@services/file.service.js');
-const User = require("@models/User.js");
+const FileService = require("../services/file.service.js");
+const User = require("../models/User.js");
 
 class UserService {
-  async createUser(user, picture) {
-    const fileName = FileService.saveFile(picture);
-    return await User.create({ ...user, picture: fileName });
+  async createUser(user) {
+    return await User.create({ ...user, picture: 'null.jpg' });
   }
 
   async getUserById(_id) {
@@ -14,6 +13,7 @@ class UserService {
 
   async updateUser(user) {
     if (!user._id) throw new Error("The ID is not specified");
+    // if (picture) {fileName = FileService.saveFile(picture);}
     return await User.findByIdAndUpdate(user._id, user, { new: true });
   }
 

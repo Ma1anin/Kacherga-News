@@ -25,6 +25,24 @@ class CardService {
 
     return card;
   }
+
+  createEventCard(event) {
+    const card = document.createElement("div");
+
+    card.className = "event-card";
+
+    const title = document.createElement('h2');
+    title.textContent = event.title;
+    card.appendChild(author);
+
+    const createdAt = document.createElement('h5');
+    createdAt.textContent = event.createdAt;
+    card.appendChild(createdAt);
+
+    /* STATUS ELEMENT */
+
+    return card;
+  }
 }
 
 module.exports = new CardService();

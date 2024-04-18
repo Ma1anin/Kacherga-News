@@ -3,12 +3,18 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const fileUpload = require("express-fileupload");
+const bodyParser = require("body-parser");
+
 const newsRouter = require("./src/routes/news.routes");
 const eventRouter = require("./src/routes/event.routes");
 const userRouter = require("./src/routes/user.routes");
-const CardService = require("src/services/card.service");
+const CardService = require("./src/services/card.service");
 
 const app = express();
+
+const urlencodedParser = bodyParser.urlencoded({
+  extended: false,
+});
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -20,12 +26,37 @@ app.use("/user", userRouter);
 app.set("view engine", "hbs");
 app.set("views", "public/views");
 
-app.get("/editAccount", function (req, res) {
-  res.render("editAccount.hbs");
+app.get("/edit-account", function (req, res) {
+  res.render("edit-account.hbs");
 });
 
 app.get("/register", function (req, res) {
   res.render("register.hbs");
+});
+
+app.post("/register", urlencodedParser, async function (req, res) {
+  try {
+    if (!req.body) throw new Error("Request body is empty!");
+
+    await fetch("http://localhost:3000/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...req.body, role: "user" }),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Create user request was not ok");
+        res.status(200).redirect("/login");
+        // ИСПРАВИТЬ ЭТОТ КОСТЫЛЬ!
+        return;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get("/login", function (req, res) {
@@ -35,15 +66,15 @@ app.get("/login", function (req, res) {
 app.get("/", function (req, res) {
   res.render("main.hbs");
 
-  const newsContainer = document.getElementById("news-container");
-  fetch("/news")
-    .then((response) => response.json())
-    .then((news) => {
-      news.forEach((item) => {
-        const newsCard = CardService.createNewsCard(item);
-        newsContainer.appendChild(newsCard);
-      });
-    });
+  // const newsContainer = document.getElementById("news-container");
+  // fetch("http://localhost:3000/news")
+  //   .then((response) => response.json())
+  //   .then((news) => {
+  //     news.forEach((item) => {
+  //       const newsCard = CardService.createNewsCard(item);
+  //       newsContainer.appendChild(newsCard);
+  //     });
+  //   });
 });
 
 async function startApp() {

@@ -1,4 +1,4 @@
-const EventService = require("@services/event.service.js");
+const EventService = require("../services/event.service.js");
 
 class EventController {
   async createEvent(req, res) {

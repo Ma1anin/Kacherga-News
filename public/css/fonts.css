@@ -1,9 +1,9 @@
 @font-face {
     font-family:Kamerik-105-Cyrillic;
     src: local("Kamerik-105-Cyrillic"),
-        url(/public/fonts/Kamerik105Cyrillic-Bold.woff2) format(woff2),
-        url(/public/fonts/Kamerik105Cyrillic-Bold.woff) format(woff),
-        url(/public/fonts/Kamerik105Cyrillic-Bold.eot) format(eot);
+        url(/fonts/Kamerik105Cyrillic-Bold.woff2) format(woff2),
+        url(/fonts/Kamerik105Cyrillic-Bold.woff) format(woff),
+        url(/fonts/Kamerik105Cyrillic-Bold.eot) format(eot);
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -11,9 +11,9 @@
 @font-face {
     font-family:Kamerik-105-Cyrillic;
     src: local("Kamerik-105-Cyrillic"),
-        url(/public/fonts/Kamerik105Cyrillic-Book.woff2) format(woff2),
-        url(/public/fonts/Kamerik105Cyrillic-Book.woff) format(woff),
-        url(/public/fonts/Kamerik105Cyrillic-Book.eot) format(eot);
+        url(/fonts/Kamerik105Cyrillic-Book.woff2) format(woff2),
+        url(/fonts/Kamerik105Cyrillic-Book.woff) format(woff),
+        url(/fonts/Kamerik105Cyrillic-Book.eot) format(eot);
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -21,9 +21,9 @@
 @font-face {
     font-family:Inter;
     src: local("Inter"),
-        url(/public/fonts/Inter-Regular.woff2) format(woff2),
-        url(/public/fonts/Inter-Regular.woff) format(woff),
-        url(/public/fonts/Inter-Regular.eot) format(eot);
+        url(/fonts/Inter-Regular.woff2) format(woff2),
+        url(/fonts/Inter-Regular.woff) format(woff),
+        url(/fonts/Inter-Regular.eot) format(eot);
     font-weight: 400;
     font-style: normal;
     font-display: swap;
