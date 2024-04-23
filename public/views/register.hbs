@@ -17,24 +17,24 @@
         <h1>News App</h1>
     </a>
     <section>
-        <form id="register_form" class="form">
+        <form id="register_form" class="form" method="post">
             <h2>
                 <div class="register__green-box"></div>
                 Register
             </h2>
             <div class="inputbox">
-                <input class="form__input" id="name_register" type="text" placeholder="Enter full name..." required>
+                <input class="form__input" name="fullName" type="text" placeholder="Enter full name..." required>
             </div>
             <div class="inputbox">
-                <input class="form__input" id="email_register" type="text" placeholder="Enter login..." required>
+                <input class="form__input" name="login" type="text" placeholder="Enter login..." required>
             </div>
             <div class="inputbox">
-                <input class="form__input" id="password_register" type="password" placeholder="Enter password..."
+                <input class="form__input" name="password" type="password" placeholder="Enter password..."
                     required>
             </div>
 
             <div class="form__button">
-                <button class="button">Register</button>
+                <button type="submit" class="button">Register</button>
             </div>
         </form>
     </section>

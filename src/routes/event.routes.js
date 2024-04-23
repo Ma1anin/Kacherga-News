@@ -1,6 +1,6 @@
 const Router = require('express');
 const router = new Router();
-const eventController = require('../controllers/event.controller');
+const eventController = require('../controllers/event.controller.js');
 
 router.post('/', eventController.createEvent);
 router.get('/:id', eventController.getEventById);

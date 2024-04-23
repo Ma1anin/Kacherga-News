@@ -1,5 +1,5 @@
-const News = require("../models/News");
-const FileService = require("../services/file.service");
+const FileService = require("../services/file.service.js");
+const News = require("../models/News.js");
 
 class NewsService {
   async createNews(news, picture) {

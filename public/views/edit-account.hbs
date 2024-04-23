@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/Logo.ico">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/Edit account style.css">
+    <title>Edit Account</title>
+</head>
+
+<body>
+    <!-- <a href="/public/pages/main.html">
+        <h1>News App</h1>
+    </a> -->
+    <section>
+        <div class="edit__green-box"></div>
+        <form id="edit_account" class="edit__account">
+            <h2>
+                Edit Account
+            </h2>
+            <div class="text_avatar">Avatar</div>
+            <div class="avatar">
+                <div class="avatar_default"></div>
+                <div class="form__button edit_avatar">
+                    <button id="btn-upload button_black" class="button_upload button_green">Upload</button>
+                    <button id="btn-remove button_green" class="button_remove button_black">Remove</button>
+                </div>
+            </div>
+            <!-- <div class="input_boxs"> -->
+                <div class="inputbox">
+                    <div class="input_text">Full name</div>
+                    <input class="form__input" id="name_edit" placeholder="Enter name..." type="text" required>
+                    <!-- <label for="name_edit">Full name</label> -->
+                </div>
+                <div class="inputbox">
+                    <div class="input_text">Login</div>
+                    <input class="form__input" id="login_edit" placeholder="Enter login..." type="text" required>
+                    <!-- <label for="login_edit">Login</label> -->
+                </div>
+            <!-- </div> -->
+            <div class="form__button">
+                <button id= "btn-cancel" class="button_cancel button_black">Cancel</button>
+                <button id="btn-green" class="button_save button_green">Save</button>
+            </div>
+        </form>
+    </section>
+</body>
