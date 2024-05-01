@@ -13,27 +13,3 @@
 ## Description
 ## Demo site
 ## Project setup
-1. Клонируй Git репозиторий командой:
-```
-git clone https://github.com/Ma1anin/News-App.git
-```
-2. В корневой папке установи зависимости проекта командой:
-```gitbash
-npm install
-```
-> [!CAUTION]
-> На ПК должен быть установлен Node.js! см. [Как установить Node.js?](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
-
-3. Запусти сервер командой:
-> В режиме разработчика
-```
-npm run start:dev
-```
-> В режиме пользователя
-```
-npm run start:prod
-```
-
-> [!TIP]
-> После запуска сервера стоит перейти по адресу *http://localhost:3000*
-
