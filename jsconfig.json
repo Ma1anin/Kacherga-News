@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "CommonJS",
+    "paths": {
+      "@services/*": ["./src/services/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@models/*": ["./src/models/*"]
+    }
+  }
+}
