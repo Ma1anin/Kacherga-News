@@ -1,7 +1,8 @@
-const NewsService = require("../services/news.service.js");
+import { Request, Response } from "express";
+import NewsService from "../services/news.service";
 
 class NewsController {
-  async createNews(req, res) {
+  public async createNews(req: Request, res: Response): Promise<Response> {
     try {
       const createdNews = await NewsService.createNews(
         req.body,
@@ -9,45 +10,45 @@ class NewsController {
       );
       return res.json(createdNews);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
-  async getNews(req, res) {
+  public async getNews(req: Request, res: Response): Promise<Response> {
     try {
       const news = await NewsService.getNews();
       return res.json(news);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
-  async getNewsById(req, res) {
+  public async getNewsById(req: Request, res: Response): Promise<Response> {
     try {
       const news = await NewsService.getNewsById(req.params.id);
       return res.json(news);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
-  async updateNews(req, res) {
+  public async updateNews(req: Request, res: Response): Promise<Response> {
     try {
       const updatedNews = await NewsService.updateNews(req.body);
       return res.json(updatedNews);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
-  async deleteNews(req, res) {
+  public async deleteNews(req: Request, res: Response): Promise<Response> {
     try {
       const deletedNews = await NewsService.deleteNews(req.params.id);
       return res.json(deletedNews);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 }
 
-module.exports = new NewsController();
+export default new NewsController();
