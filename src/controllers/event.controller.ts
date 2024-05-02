@@ -1,50 +1,51 @@
-const EventService = require("../services/event.service.js");
+import { Request, Response } from "express";
+import EventService from "../services/event.service";
 
 class EventController {
-  async createEvent(req, res) {
+  public async createEvent(req: Request, res: Response): Promise<Response> {
     try {
       const createdEvent = await EventService.createEvent(req.body);
       return res.json(createdEvent);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
-  async getEvents(req, res) {
+  public async getEvents(req: Request, res: Response): Promise<Response> {
     try {
       const events = await EventService.getEvents();
       return res.json(events);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
-  async getEventById(req, res) {
+  public async getEventById(req: Request, res: Response): Promise<Response> {
     try {
       const event = await EventService.getEventById(req.params.id);
       return res.json(event);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
-  async updateEvent(req, res) {
+  public async updateEvent(req: Request, res: Response): Promise<Response> {
     try {
       const updatedEvent = await EventService.updateEvent(req.body);
       return res.json(updatedEvent);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
-  async deleteEvent(req, res) {
+  public async deleteEvent(req: Request, res: Response): Promise<Response> {
     try {
       const deletedEvent = await EventService.deleteEvent(req.params.id);
       return res.json(deletedEvent);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 }
 
-module.exports = new EventController();
+export default new EventController();

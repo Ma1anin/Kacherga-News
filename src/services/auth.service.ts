@@ -1,6 +1,6 @@
-const argon2 = require("argon2");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User.js");
+import argon2 from "argon2";
+import jwt from "jsonwebtoken";
+import UserModel from "../models/User";
 
 class AuthService {
   public async register(
@@ -10,7 +10,7 @@ class AuthService {
   ): Promise<any> {
     const passwordHashed = await argon2.hash(password);
 
-    const userRecord = await User.create({
+    const userRecord = await UserModel.create({
       password: passwordHashed,
       login,
       name,
@@ -27,7 +27,7 @@ class AuthService {
   }
 
   public async login(login: string, password: string): Promise<any> {
-    const userRecord = await User.findOne(login);
+    const userRecord = await UserModel.findOne({ login });
 
     if (!userRecord) {
       throw new Error("User not found");
@@ -62,4 +62,4 @@ class AuthService {
   }
 }
 
-module.exports = new AuthService();
+export default new AuthService();

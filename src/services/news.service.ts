@@ -1,14 +1,6 @@
 import FileService from "../services/file.service";
 import NewsModel from "../models/News";
-
-interface News {
-  _id: string;
-  title: string;
-  content: string;
-  picture: string;
-  createdAt: Date;
-  authorID: string;
-}
+import News from "../interfaces/news.interface";
 
 class NewsService {
   public async createNews(news: News, picture: string): Promise<News> {

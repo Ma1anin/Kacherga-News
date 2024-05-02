@@ -1,12 +1,5 @@
-import EventModel from '../models/Event';
-
-interface Event {
-  _id: string;
-  title: string;
-  content: string;
-  createdAt: Date;
-  authorID: string;
-}
+import EventModel from "../models/Event";
+import Event from "../interfaces/event.interface";
 
 class EventService {
   public async createEvent(event: Event): Promise<Event> {
