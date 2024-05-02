@@ -1,4 +1,4 @@
-const EventModel = require("../models/Event.js");
+import EventModel from '../models/Event';
 
 interface Event {
   _id: string;

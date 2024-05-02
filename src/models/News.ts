@@ -1,19 +1,21 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-interface IEvent extends Document {
+interface INews extends Document {
   title: string;
   content: string;
+  picture: string;
   createdAt: Date;
   authorID: string;
 }
-  
-const EventSchema: Schema = new Schema({
+
+const NewsSchema: Schema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
+  picture: { type: String },
   createdAt: { type: Date, required: true },
   authorID: { type: String, required: true },
 });
 
-const EventModel = mongoose.model<IEvent>("Event", EventSchema);
+const NewsModel = mongoose.model<INews>("News", NewsSchema);
 
-export default EventModel;
+export default NewsModel;
