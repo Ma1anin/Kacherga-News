@@ -1,33 +1,19 @@
-include .env
-
-GOCMD=go
-GOBUILD=$(GOCMD) build
-GOCLEAN=$(GOCMD) clean
-GOTEST=$(GOCMD) test
-GOGET=$(GOCMD) get
-
-BINARY_NAME=newsapp
-BINARY_UNIX=$(BINARY_NAME)_unix
-
-all: help
+BINARY_NAME="newsapp"
 
 build:
-	$(GOBUILD) -o $(BINARY_NAME) -v
+	go build -o cmd/web main.go
 
 run:
-	build
-	./$(BINARY_NAME)
+	go run cmd/web/main.go
 
-test: 
-	$(GOTEST) -v ./test/test.go
+win:
+	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o ${BINARY_NAME}
 
-clean:
-	$(GOCLEAN)
-	rm -f @(BINARY_NAME)
-	rm -f @(BINARY_UNIX)
-
-.PHONY: help
 help:
-    @echo "  >  make build - build project"
-    @echo "  >  make run - build and run project"
-    @echo "  >  make clean - clean binary file"
+    @echo "make - clean, format, build"
+    @echo "make build - just build"
+    @echo "make run - just run"
+    @echo "make clean - clean binary file"
+    @echo "make gotool - run fmt and vet tools"
+    @echo "make mac - build for mac"
+    @echo "make win - build for windows"
