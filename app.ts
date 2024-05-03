@@ -1,14 +1,14 @@
 require("dotenv").config();
 
-const mongoose = require("mongoose");
-const express = require("express");
-const fileUpload = require("express-fileupload");
-const bodyParser = require("body-parser");
+import mongoose from "mongoose";
+import express from "express";
+import fileUpload from "express-fileupload";
+import bodyParser from "body-parser";
 
-const newsRouter = require("./src/routes/news.routes");
-const eventRouter = require("./src/routes/event.routes");
-const userRouter = require("./src/routes/user.routes");
-const CardService = require("./src/services/card.service");
+import newsRouter from "./src/routes/news.routes";
+import eventRouter from "./src/routes/event.routes";
+import userRouter from "./src/routes/user.routes";
+import CardService from "./src/services/card.service";
 
 const app = express();
 
