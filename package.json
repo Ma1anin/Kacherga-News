@@ -4,9 +4,9 @@
   "description": "null",
   "main": "app.js",
   "scripts": {
-    "start:prod": "node app.js",
-    "start:dev": "nodemon --inspect app.js",
-    "test": "node test.js"
+    "start:prod": "node app.ts",
+    "start:dev": "nodemon --inspect app.ts",
+    "test": "mocha tests/test.ts"
   },
   "repository": {
     "type": "git",
