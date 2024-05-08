@@ -122,9 +122,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 10px;
     margin-right: 10px;
     border-radius: 6px;
-    width: 100px;
+    min-width: 100px;
     height: 28px;
     font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
@@ -176,6 +177,7 @@ body {
 
 .header__top-new-board {
     display: flex;
+    align-items: center;
     margin-top: 20px;
     margin-left: 20px;
 }
@@ -183,6 +185,7 @@ body {
 .header__top-new-board-text {
     display: flex;
     align-items: center;
+    white-space: nowrap;
     font-family: Kamerik-105-Cyrillic;
     font-weight: 700;
     font-size: 16px;
@@ -230,20 +233,20 @@ body {
 }
 
 .select {
-    position: relative;
     display: block;
-    min-width: 220px;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 20px;
+    min-width: 220px;
+    margin-left: auto;
+    margin-right: 10px;
+    position: relative;
 }
-
 .select__head {
     width: 100%;
     max-width: 100%;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    padding: 14px 15px;
+    /* padding: 14px 15px; */
     font-size: 14px;
     line-height: 18px;
     color: rgba(66, 67, 72, 0.8);
@@ -266,6 +269,8 @@ body {
 .select__head.open::after {
     transform: translateY(50%) rotate(180deg);
 }
+
+
 
 .select__list {
     display: none;
@@ -333,6 +338,7 @@ body {
 
 .header__top-events {
     display: flex;
+    align-items: center;
     margin-top: 20px;
     margin-left: 20px;
 }

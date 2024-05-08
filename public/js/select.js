@@ -25,3 +25,12 @@ jQuery(($) => {
         }
     });
 });
+
+var pl = document.getElementById('player');
+pl.currentTime = 43.0;
+
+document.addEventListener('DOMContentLoaded', () => {
+    let audio = document.querySelector('player');
+
+    player.volume = 0.05;
+}, false);
