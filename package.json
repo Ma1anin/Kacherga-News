@@ -2,11 +2,11 @@
   "name": "newsapp",
   "version": "1.0.0",
   "description": "null",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
     "start:prod": "node app.ts",
     "start:dev": "nodemon --inspect app.ts",
-    "test": "mocha tests/test.ts"
+    "test-services": "mocha src/tests/services.test.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "chai": "^5.1.0",
     "chai-http": "^4.4.0",
+    "mocha": "^10.4.0",
     "nodemon": "^3.1.0"
   }
 }
