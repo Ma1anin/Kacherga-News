@@ -1,9 +1,12 @@
 const FileService = require("../services/file.service.js");
 const User = require("../models/User.js");
+const argon2 = require("argon2");
 
 class UserService {
   async createUser(user) {
-    return await User.create({ ...user, picture: "null.jpg" });
+    console.log(user.password);
+    const passwordHashed = await argon2.hash(user.password);
+    return await User.create({ ...user, password: passwordHashed, picture: "null.jpg" });
   }
 
   async getUserById(_id) {

@@ -1,11 +1,8 @@
- 
 {
-    "compilerOptions": {
-        "module": "CommonJS",
-        "target": "ES6",
-        "esModuleInterop": true,
-        "removeComments": true,
-        "moduleResolution": "node"
-    }
+  "compilerOptions": {
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "removeComments": true,
+    "moduleResolution": "node"
+  }
 }
-// WEALTHIBOI - STORM 

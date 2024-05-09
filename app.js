@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 const newsRouter = require("./src/routes/news.routes");
 const eventRouter = require("./src/routes/event.routes");
 const userRouter = require("./src/routes/user.routes");
-const CardService = require("./src/services/card.service");
 
 const app = express();
 
@@ -37,7 +36,7 @@ app.get("/register", function (req, res) {
 app.post("/register", urlencodedParser, async function (req, res) {
   try {
     if (!req.body) throw new Error("Request body is empty!");
-
+    console.log(req.body);
     await fetch("http://localhost:3000/user", {
       method: "POST",
       headers: {
@@ -65,16 +64,6 @@ app.get("/login", function (req, res) {
 
 app.get("/", function (req, res) {
   res.render("main.hbs");
-
-  // const newsContainer = document.getElementById("news-container");
-  // fetch("http://localhost:3000/news")
-  //   .then((response) => response.json())
-  //   .then((news) => {
-  //     news.forEach((item) => {
-  //       const newsCard = CardService.createNewsCard(item);
-  //       newsContainer.appendChild(newsCard);
-  //     });
-  //   });
 });
 
 async function startApp() {

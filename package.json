@@ -2,10 +2,10 @@
   "name": "newsapp",
   "version": "1.0.0",
   "description": "null",
-  "main": "app.ts",
+  "main": "app.js",
   "scripts": {
-    "start:prod": "node app.ts",
-    "start:dev": "nodemon --inspect app.ts",
+    "start:prod": "node app.js",
+    "start:dev": "nodemon --inspect app.js",
     "test-services": "mocha src/tests/services.test.js"
   },
   "repository": {
