@@ -4,7 +4,6 @@ const argon2 = require("argon2");
 
 class UserService {
   async createUser(user) {
-    console.log(user.password);
     const passwordHashed = await argon2.hash(user.password);
     return await User.create({ ...user, password: passwordHashed, picture: "null.jpg" });
   }

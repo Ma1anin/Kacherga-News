@@ -36,7 +36,6 @@ app.get("/register", function (req, res) {
 app.post("/register", urlencodedParser, async function (req, res) {
   try {
     if (!req.body) throw new Error("Request body is empty!");
-    console.log(req.body);
     await fetch("http://localhost:3000/user", {
       method: "POST",
       headers: {
