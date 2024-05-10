@@ -43,7 +43,24 @@ class UserController {
     }
   }
 
-  async createUser(req, res) {
+  async logout(req, res) {
+    if (req.session.userId) {
+      req.session.destroy();
+      res.status(200).json({
+        status: "success",
+        data: [],
+        message: "Successful account logout",
+      });
+    } else {
+      res.status(200).json({
+        status: "failed",
+        data: [],
+        message: "Unauthorized",
+      });
+    }
+  }
+
+  async register(req, res) {
     const { fullName, login, password } = req.body;
     try {
       const user = await User.findOne({ login: login });

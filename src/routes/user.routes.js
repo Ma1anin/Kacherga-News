@@ -9,10 +9,10 @@ router.post(
     .notEmpty()
     .isLength({ min: 8 })
     .withMessage("Must be at least 8 chars long"),
-  userController.createUser
+  userController.register
 );
 router.post("/login", userController.login);
-//router.post("/logout", userController.logout);
+router.post("/logout", userController.logout);
 router.get("/user:id", userController.getUserById);
 router.put("/user", userController.updateUser);
 router.delete("/user:id", userController.deleteUser);
