@@ -1,26 +1,81 @@
-const UserService = require("../services/user.service.js");
+const User = require("../models/User");
+const argon2 = require("argon2");
 
 class UserController {
   async login(req, res) {
+    const { login, password } = req.body;
     try {
-      let result = await UserService.login(req.body);
-      if (result.error) {
-        return res.status(401).json({ msg: result.error });
-      }
-      req.session.userId = result.id;
+      const user = await User.findOne({ login: login });
 
-      return res.json({message: 'Success!'});
+      if (!user) {
+        return res.status(401).json({
+          status: "failed",
+          data: [],
+          message: "User not found",
+        });
+      }
+
+      if (await argon2.verify(user.password, password)) {
+        req.session.userId = user.id;
+        return res.status(200).json({
+          status: "success",
+          data: {
+            login: user.login,
+            fullName: user.fullName,
+            picture: user.picture,
+          },
+          message: "Successful account login",
+        });
+      } else {
+        return res.status(401).json({
+          status: "failed",
+          data: [],
+          message: "Incorrect password",
+        });
+      }
     } catch (err) {
-      res.status(500).json({ msg: "Server Error Please reload page" });
+      console.log(err);
+      res.status(500).json({
+        status: "failed",
+        data: [],
+        message: "Server Error Please reload page",
+      });
     }
   }
 
   async createUser(req, res) {
+    const { fullName, login, password } = req.body;
     try {
-      const createdUser = await UserService.createUser(req.body);
-      return res.json(createdUser);
+      const user = await User.findOne({ login: login });
+
+      if (user) {
+        return res.status(401).json({
+          status: "failed",
+          data: [],
+          message: "The user already exists",
+        });
+      }
+
+      const hashedPassword = await argon2.hash(password);
+      const newUser = {
+        login: login,
+        password: hashedPassword,
+        fullName: fullName,
+      };
+
+      await User.create(newUser);
+
+      return res.status(200).json({
+        status: "success",
+        data: [],
+        message: "Successful registration",
+      });
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({
+        status: "failed",
+        data: [],
+        message: "Server Error Please reload page",
+      });
     }
   }
 

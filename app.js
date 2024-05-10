@@ -66,7 +66,7 @@ app.post("/register", urlencodedParser, async function (req, res) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...req.body, role: "user" }),
+      body: JSON.stringify(req.body),
     })
       .then((response) => {
         if (!response.ok) throw new Error("Create user request was not ok");
@@ -85,8 +85,8 @@ app.post("/register", urlencodedParser, async function (req, res) {
 app.post("/login", urlencodedParser, async function (req, res) {
   try {
     const result = validationResult(req.body);
-    if (result.isEmpty()) throw new Error("Request body is empty!");
-
+    if (!result.isEmpty()) throw new Error("Request body is empty!");
+    console.log(req.body);
     await fetch("http://localhost:3000/api/login", {
       method: "POST",
       headers: {
@@ -104,7 +104,7 @@ app.post("/login", urlencodedParser, async function (req, res) {
         console.error(error);
       });
   } catch (err) {
-    res.status(401).json({msg: err.message});
+    res.status(401).json({message: err.message});
   }
 });
 
