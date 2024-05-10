@@ -3,9 +3,26 @@ const User = require("../models/User.js");
 const argon2 = require("argon2");
 
 class UserService {
+  async login(userData) {
+    const { login, password } = userData;
+    const user = await User.findOne({ login: login });
+
+    if (!user) return { error: "User not found!" };
+
+    if (await argon2.verify(user.password, password)) {
+      return user;
+    } else {
+      return { error: "Incorrect password" };
+    }
+  }
+
   async createUser(user) {
     const passwordHashed = await argon2.hash(user.password);
-    return await User.create({ ...user, password: passwordHashed, picture: "null.jpg" });
+    return await User.create({
+      ...user,
+      password: passwordHashed,
+      picture: "null.jpg",
+    });
   }
 
   async getUserById(_id) {

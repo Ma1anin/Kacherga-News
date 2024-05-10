@@ -1,6 +1,20 @@
 const UserService = require("../services/user.service.js");
 
 class UserController {
+  async login(req, res) {
+    try {
+      let result = await UserService.login(req.body);
+      if (result.error) {
+        return res.status(401).json({ msg: result.error });
+      }
+      req.session.userId = result.id;
+
+      return res.json({message: 'Success!'});
+    } catch (err) {
+      res.status(500).json({ msg: "Server Error Please reload page" });
+    }
+  }
+
   async createUser(req, res) {
     try {
       const createdUser = await UserService.createUser(req.body);
