@@ -73,3 +73,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     player.volume = 0.05;
 }, false);
+
+
+// const selector = document.getElementById("selector");
+// const joker = document.getElementById("soska");
+
+// joker.style.visibility = "hidden";
+
+// function changeOption() {
+//     const selectedOption = selector.options[selector.selectedIndex];
+//     console.log(selectedOption.value);
+//     if (selectedOption.value == "Лайк Лизы") {
+//         joker.style.visibility = "visible";
+//     } else {
+//         joker.style.visibility = "hidden";
+//     }
+// }
+
+// selector.addEventListener("change", changeOption);

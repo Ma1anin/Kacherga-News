@@ -6,7 +6,8 @@
   "scripts": {
     "start:prod": "node app.js",
     "start:dev": "nodemon --inspect app.js",
-    "test-services": "mocha src/tests/services.test.js"
+    "test": "mocha src/tests",
+    "test-http": "mocha src/tests/http.test.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "chai": "^5.1.0",
+    "chai": "^4.4.1",
     "chai-http": "^4.4.0",
     "mocha": "^10.4.0",
     "nodemon": "^3.1.0"
