@@ -1,20 +1,25 @@
 package initializers
 
 import (
+	"context"
 	"os"
 
-	"gopkg.in/mgo.v2"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-var DB *mgo.Database
+var DB *mongo.Database
 
 func ConnectToDb() {
-	session, err := mgo.Dial(os.Getenv("DB_URL"))
-
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("DB_URL")))
 	if err != nil {
 		panic(err)
 	}
-	defer session.Close()
 
-	DB = session.DB("Cluster0")
+	if err := client.Ping(context.TODO(), readpref.Primary()); err != nil {
+		panic(err)
+	}
+
+	DB = client.Database("Cluster0")
 }
