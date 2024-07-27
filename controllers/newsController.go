@@ -15,7 +15,7 @@ import (
 
 func GetAllNews(c *gin.Context) {
 	collection := initializers.DB.Collection("news")
-	filter := bson.M{}
+	filter := bson.D{}
 
 	cursor, err := collection.Find(context.TODO(), filter)
 	if err != nil {
@@ -26,16 +26,16 @@ func GetAllNews(c *gin.Context) {
 		return
 	}
 
-	var results []models.News
-	if err = cursor.All(context.TODO(), &results); err != nil {
+	var result []models.News
+	if err = cursor.All(context.TODO(), &result); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to decode document",
+			"error": "Failed to decode documents",
 		})
 
 		return
 	}
 
-	c.JSON(http.StatusOK, results)
+	c.JSON(http.StatusOK, result)
 }
 
 func GetNewsById(c *gin.Context) {
