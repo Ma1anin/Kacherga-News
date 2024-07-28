@@ -27,6 +27,8 @@ func main() {
 	r.POST("/event", controllers.CreateEvent)
 	r.PUT("/event/:id", controllers.UpdateEventById)
 	r.DELETE("/event/:id", controllers.DeleteEventById)
+	
+	r.POST("/user", controllers.Signup)
 
 	r.Run(os.Getenv("LISTEN_ADDR"))
 }

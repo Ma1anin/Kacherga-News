@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 
@@ -12,12 +13,25 @@ import (
 	"github.com/cortezzIP/Kacherga-News/models"
 )
 
-func Signup(c gin.Context) {
+func Signup(c *gin.Context) {
 	var newUser models.User
 
 	if c.Bind(&newUser) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to read body",
+		})
+
+		return
+	}
+	
+	var findResult models.User
+	collection := initializers.DB.Collection("users")
+	filter := bson.D{{"login", newUser.Login}}
+
+	collection.FindOne(context.TODO(), filter).Decode(&findResult)
+	if findResult.ID != primitive.NilObjectID {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "User already register",
 		})
 
 		return
@@ -38,7 +52,6 @@ func Signup(c gin.Context) {
 
 	newUser.Password = string(hash)
 
-	collection := initializers.DB.Collection("users")
 
 	result, err := collection.InsertOne(context.TODO(), newUser)
 	if err != nil {
@@ -47,9 +60,9 @@ func Signup(c gin.Context) {
 		})
 	}
 
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, result.InsertedID)
 }
 
-func Login(c gin.Context) {
+func Login(c *gin.Context) {
 
 }
