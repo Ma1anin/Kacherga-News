@@ -71,7 +71,7 @@ func CreateEvent(c *gin.Context) {
 
 	if c.Bind(&newEvent) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to read body",
+			"error": "Failed to read request body",
 		})
 
 		return
@@ -108,7 +108,7 @@ func UpdateEventById(c *gin.Context) {
 	var updateData bson.M
 	if c.ShouldBindJSON(&updateData) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to read body",
+			"error": "Failed to read request body",
 		})
 
 		return

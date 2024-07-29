@@ -44,10 +44,10 @@ func GetNewsById(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "ID is invalid",
 		})
-		
+
 		return
 	}
-	
+
 	collection := initializers.DB.Collection("news")
 	filter := bson.D{{"_id", objId}}
 
@@ -71,7 +71,7 @@ func CreateNews(c *gin.Context) {
 
 	if c.Bind(&newNews) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to read body",
+			"error": "Failed to read request body",
 		})
 
 		return
@@ -103,14 +103,14 @@ func UpdateNewsById(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "ID is invalid",
 		})
-		
+
 		return
 	}
 
 	var updateData bson.M
 	if c.ShouldBindJSON(&updateData) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to read body",
+			"error": "Failed to read request body",
 		})
 
 		return
@@ -137,10 +137,10 @@ func DeleteNewsById(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "ID is invalid",
 		})
-		
+
 		return
 	}
-	
+
 	collection := initializers.DB.Collection("news")
 	filter := bson.D{{"_id", objId}}
 

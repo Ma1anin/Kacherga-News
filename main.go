@@ -5,6 +5,7 @@ import (
 
 	"github.com/cortezzIP/Kacherga-News/controllers"
 	"github.com/cortezzIP/Kacherga-News/initializers"
+	"github.com/cortezzIP/Kacherga-News/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,7 +29,9 @@ func main() {
 	r.PUT("/event/:id", controllers.UpdateEventById)
 	r.DELETE("/event/:id", controllers.DeleteEventById)
 	
-	r.POST("/user", controllers.Signup)
-
+	r.POST("/signup", controllers.Signup)
+	r.POST("/login", controllers.Login)
+	r.GET("/validate", middleware.RequireAuth, controllers.Validate)
+	
 	r.Run(os.Getenv("LISTEN_ADDR"))
 }
