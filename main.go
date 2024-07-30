@@ -17,21 +17,25 @@ func init() {
 func main() {
 	r := gin.Default()
 
-	r.GET("/news", controllers.GetAllNews)
-	r.GET("/news/:id", controllers.GetNewsById)
-	r.POST("/news", controllers.CreateNews)
-	r.PUT("/news/:id", controllers.UpdateNewsById)
-	r.DELETE("/news/:id", controllers.DeleteNewsById)
+	r.SetTrustedProxies([]string{"localhost:8080"})
 
-	r.GET("/event", controllers.GetAllEvents)
-	r.GET("/event/:id", controllers.GetEventById)
-	r.POST("/event", controllers.CreateEvent)
-	r.PUT("/event/:id", controllers.UpdateEventById)
-	r.DELETE("/event/:id", controllers.DeleteEventById)
+	router := r.Group("/api")
+
+	router.GET("/news", controllers.GetAllNews)
+	router.GET("/news/:id", controllers.GetNewsById)
+	router.POST("/news", middleware.RequireAuth, controllers.CreateNews)
+	router.PUT("/news/:id", middleware.RequireAuth, controllers.UpdateNewsById)
+	router.DELETE("/news/:id", middleware.RequireAuth, controllers.DeleteNewsById)
+
+	router.GET("/event", controllers.GetAllEvents)
+	router.GET("/event/:id", controllers.GetEventById)
+	router.POST("/event", middleware.RequireAuth, controllers.CreateEvent)
+	router.PUT("/event/:id", middleware.RequireAuth, controllers.UpdateEventById)
+	router.DELETE("/event/:id", middleware.RequireAuth, controllers.DeleteEventById)
 	
-	r.POST("/signup", controllers.Signup)
-	r.POST("/login", controllers.Login)
-	r.GET("/validate", middleware.RequireAuth, controllers.Validate)
+	router.POST("/signup", controllers.Signup)
+	router.POST("/login", controllers.Login)
+	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
 	
 	r.Run(os.Getenv("LISTEN_ADDR"))
 }

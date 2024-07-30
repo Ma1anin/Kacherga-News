@@ -79,8 +79,10 @@ func CreateNews(c *gin.Context) {
 
 	collection := initializers.DB.Collection("news")
 
+	user, _ := c.Get("user")
+
 	newNews.ID = primitive.NewObjectID()
-	newNews.AuthorID = "test"
+	newNews.AuthorLogin = user.(models.User).Login
 	newNews.Picture = "null.jpg"
 	newNews.CreatedAt = time.Now()
 

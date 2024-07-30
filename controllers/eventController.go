@@ -77,9 +77,11 @@ func CreateEvent(c *gin.Context) {
 		return
 	}
 
+	user, _ := c.Get("user")
+
 	newEvent.ID = primitive.NewObjectID()
 	newEvent.CreatedAt = time.Now()
-	newEvent.AuthorID = "some userId"
+	newEvent.AuthorLogin = user.(models.User).Login
 
 	collection := initializers.DB.Collection("events")
 
