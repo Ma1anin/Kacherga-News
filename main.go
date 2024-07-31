@@ -12,10 +12,13 @@ import (
 func init() {
 	initializers.LoadEnvVariables()
 	initializers.ConnectToDb()
+	initializers.ConnectToObjectStorage()
 }
 
 func main() {
 	r := gin.Default()
+
+
 
 	r.SetTrustedProxies([]string{"localhost:8080"})
 
