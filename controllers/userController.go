@@ -124,3 +124,7 @@ func Login(c *gin.Context) {
 func Validate(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{})
 }
+
+func Logout(c *gin.Context) {
+	c.SetCookie("Authorization", "", -1, "", "", false, true)
+}

@@ -18,8 +18,7 @@ func init() {
 func main() {
 	r := gin.Default()
 
-
-
+	r.MaxMultipartMemory = 8 << 20
 	r.SetTrustedProxies([]string{"localhost:8080"})
 
 	router := r.Group("/api")
@@ -38,6 +37,7 @@ func main() {
 	
 	router.POST("/signup", controllers.Signup)
 	router.POST("/login", controllers.Login)
+	router.POST("/logout", middleware.RequireAuth, controllers.Logout)
 	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
 	
 	r.Run(os.Getenv("LISTEN_ADDR"))
