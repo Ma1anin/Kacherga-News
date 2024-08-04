@@ -3,23 +3,28 @@ package main
 import (
 	"os"
 
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+
 	"github.com/cortezzIP/Kacherga-News/controllers"
 	"github.com/cortezzIP/Kacherga-News/initializers"
 	"github.com/cortezzIP/Kacherga-News/middleware"
-	"github.com/gin-gonic/gin"
 )
 
 func init() {
 	initializers.LoadEnvVariables()
 	initializers.ConnectToDb()
-	initializers.ConnectToObjectStorage()
+	initializers.ConnectToImageStorage()
 }
 
 func main() {
 	r := gin.Default()
 
+	config := cors.DefaultConfig()
+    config.AllowOrigins = []string{"http://127.0.0.1:5500"}
+    r.Use(cors.New(config))
+
 	r.MaxMultipartMemory = 8 << 20
-	r.SetTrustedProxies([]string{"localhost:8080"})
 
 	router := r.Group("/api")
 
