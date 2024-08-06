@@ -49,7 +49,7 @@ func GetNewsById(c *gin.Context) {
 	}
 
 	collection := initializers.DB.Collection("news")
-	filter := bson.D{{"_id", objId}}
+	filter := bson.D{{Key: "_id", Value: objId}}
 
 	var result models.News
 
@@ -133,9 +133,9 @@ func UpdateNewsById(c *gin.Context) {
 	}
 
 	collection := initializers.DB.Collection("news")
-	filter := bson.D{{"_id", objId}}
+	filter := bson.D{{Key: "_id", Value: objId}}
 
-	result, err := collection.UpdateOne(context.TODO(), filter, bson.D{{"$set", updateData}})
+	_, err = collection.UpdateOne(context.TODO(), filter, bson.D{{Key: "$set", Value: updateData}})
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to update news",
@@ -144,7 +144,7 @@ func UpdateNewsById(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, gin.H{})
 }
 
 func DeleteNewsById(c *gin.Context) {
@@ -158,7 +158,7 @@ func DeleteNewsById(c *gin.Context) {
 	}
 
 	collection := initializers.DB.Collection("news")
-	filter := bson.D{{"_id", objId}}
+	filter := bson.D{{Key: "_id", Value: objId}}
 
 	result, err := collection.DeleteOne(context.TODO(), filter)
 

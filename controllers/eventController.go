@@ -50,7 +50,7 @@ func GetEventById(c *gin.Context) {
 	}
 
 	collection := initializers.DB.Collection("events")
-	filter := bson.D{{"_id", objId}}
+	filter := bson.D{{Key: "_id", Value: objId}}
 
 	var result models.Event
 
@@ -117,9 +117,9 @@ func UpdateEventById(c *gin.Context) {
 	}
 
 	collection := initializers.DB.Collection("events")
-	filter := bson.D{{"_id", objId}}
+	filter := bson.D{{Key: "_id", Value: objId}}
 
-	result, err := collection.UpdateOne(context.TODO(), filter, bson.D{{"$set", updateData}})
+	result, err := collection.UpdateOne(context.TODO(), filter, bson.D{{Key: "$set", Value: updateData}})
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to update event",
@@ -142,7 +142,7 @@ func DeleteEventById(c *gin.Context) {
 	}
 
 	collection := initializers.DB.Collection("events")
-	filter := bson.D{{"_id", objId}}
+	filter := bson.D{{Key: "_id", Value: objId}}
 
 	result, err := collection.DeleteOne(context.TODO(), filter)
 	if err != nil {

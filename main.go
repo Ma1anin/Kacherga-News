@@ -43,6 +43,7 @@ func main() {
 	router.POST("/signup", controllers.Signup)
 	router.POST("/login", controllers.Login)
 	router.POST("/logout", middleware.RequireAuth, controllers.Logout)
+	router.POST("/userUpdate", middleware.RequireAuth, controllers.UpdateUser)
 	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
 	
 	r.Run(os.Getenv("LISTEN_ADDR"))

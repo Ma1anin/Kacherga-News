@@ -31,7 +31,7 @@ func Signup(c *gin.Context) {
 
 	var findResult models.User
 	collection := initializers.DB.Collection("users")
-	filter := bson.D{{"login", newUser.Login}}
+	filter := bson.D{{Key: "login", Value: newUser.Login}}
 
 	collection.FindOne(context.TODO(), filter).Decode(&findResult)
 	if findResult.ID != primitive.NilObjectID {
@@ -83,7 +83,7 @@ func Login(c *gin.Context) {
 
 	var user models.User
 	collection := initializers.DB.Collection("users")
-	filter := bson.D{{"login", requestBody.Login}}
+	filter := bson.D{{Key: "login", Value: requestBody.Login}}
 
 	collection.FindOne(context.TODO(), filter).Decode(&user)
 
@@ -118,7 +118,36 @@ func Login(c *gin.Context) {
 	}
 
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", tokenString, cookieMaxAge, "", "", false, true)
+	c.SetCookie("Authorization", tokenString, cookieMaxAge, "/", "", false, true)
+
+	c.JSON(http.StatusOK, gin.H{})
+}
+
+func UpdateUser(c *gin.Context) {
+	var updateData bson.M
+	if c.ShouldBindJSON(&updateData) != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Failed to read request body",
+		})
+
+		return
+	}
+
+	user, _ := c.Get("user")
+	collection := initializers.DB.Collection("users")
+	filter := bson.D{{Key: "_id", Value: user.(models.User).ID}}
+
+	_, err := collection.UpdateOne(context.TODO(), filter, bson.D{{Key: "$set", Value: updateData}})
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Failed to update user",
+		})
+
+		return
+	}
+
+	c.SetSameSite(http.SameSiteLaxMode)
+	c.SetCookie("Authorization", "", -1, "", "", false, true)
 
 	c.JSON(http.StatusOK, gin.H{})
 }
@@ -128,5 +157,6 @@ func Validate(c *gin.Context) {
 }
 
 func Logout(c *gin.Context) {
+	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", "", -1, "", "", false, true)
 }
