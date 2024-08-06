@@ -68,43 +68,40 @@ func GetNewsById(c *gin.Context) {
 
 func CreateNews(c *gin.Context) {
 	var newNews models.News
+	var requestBody struct {
+		Title             string
+		Content           string
+		ImageBase64string string
+	}
 
-	if c.Bind(&newNews) != nil {
+	if c.Bind(&requestBody) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to read request body",
 		})
 
 		return
 	}
-	
-	file, err := c.FormFile("image")
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "Failed to get file from form: " + err.Error(),
-		})
-		return
-	}
 
-	imageURL, err := initializers.UploadImageToStore(file)
-	
+	imageURL, err := initializers.UploadImageToStore(requestBody.ImageBase64string)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to add file to storage: " + err.Error(),
 		})
 		return
 	}
-	
+
 	collection := initializers.DB.Collection("news")
 	user, _ := c.Get("user")
 
 	newNews.ID = primitive.NewObjectID()
+	newNews.Title = requestBody.Title
+	newNews.Content = requestBody.Content
 	newNews.Author.Login = user.(models.User).Login
 	newNews.Author.ImageURL = user.(models.User).ImageURL
 	newNews.ImageURL = imageURL
 	newNews.CreatedAt = time.Now()
 
 	result, err := collection.InsertOne(context.TODO(), newNews)
-
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to create news",

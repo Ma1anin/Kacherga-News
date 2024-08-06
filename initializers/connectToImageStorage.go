@@ -5,7 +5,6 @@ import (
 	"crypto/sha256"
 	"errors"
 	"fmt"
-	"mime/multipart"
 	"time"
 
 	"github.com/cloudinary/cloudinary-go/v2"
@@ -27,16 +26,10 @@ func ConnectToImageStorage() {
 	}
 }
 
-func UploadImageToStore(f *multipart.FileHeader) (string, error) {
-	file, err := f.Open()
-	if err != nil {
-		return "", errors.New("Failed to open file: " + err.Error())
-	}
-	defer file.Close()
-
+func UploadImageToStore(base64String string) (string, error) {
 	fileName := NewFileName()
 	
-	resp, err := cloud.Upload.Upload(context.TODO(), file, uploader.UploadParams{
+	resp, err := cloud.Upload.Upload(context.TODO(), base64String, uploader.UploadParams{
         PublicID:       fileName,
         UniqueFilename: api.Bool(true),
 	})

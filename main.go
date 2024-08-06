@@ -1,7 +1,6 @@
 package main
 
 import (
-	"net/http"
 	"os"
 
 	"github.com/gin-contrib/cors"
@@ -26,34 +25,8 @@ func main() {
     r.Use(cors.New(config))
 
 	r.MaxMultipartMemory = 8 << 20
-
-	r.LoadHTMLGlob("HTML-TESTS/*")
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{})
-	})
 	
 	router := r.Group("/api")
-	
-	router.POST("/getImage", func(c *gin.Context) {
-		file, err := c.FormFile("image")
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
-		}
-	
-		imageURL, err := initializers.UploadImageToStore(file)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
-		}
-
-		c.JSON(http.StatusOK, gin.H{
-			"image": imageURL,
-		})
-	})
-
 
 	router.GET("/news", controllers.GetAllNews)
 	router.GET("/news/:id", controllers.GetNewsById)

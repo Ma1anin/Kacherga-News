@@ -16,7 +16,7 @@ import (
 	"github.com/cortezzIP/Kacherga-News/models"
 )
 
-const cookieMaxAge = 3600*24*3
+const cookieMaxAge = 3600 * 24 * 3
 
 func Signup(c *gin.Context) {
 	var newUser models.User
