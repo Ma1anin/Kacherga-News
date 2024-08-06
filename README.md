@@ -2,7 +2,8 @@
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Exo+2&size=18&duration=4000&pause=1000&color=BCFD4C&random=false&width=435&lines=Developed+and+supported+by+cortezzIP+and+Ma1anin)](https://git.io/typing-svg)
 
 ### Backend Technology Stack
-
+![Go](https://img.shields.io/badge/go-%2300ADD8.svg?style=for-the-badge&logo=go&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ### Frontend Technology Stack
 ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
