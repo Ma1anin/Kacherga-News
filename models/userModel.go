@@ -8,5 +8,5 @@ type User struct {
 	FullName string             `json:"fullName" bson:"fullName"`
 	Password string             `json:"password" bson:"password"`
 	Role     string             `json:"role"     bson:"role"`
-	Picture  string             `json:"picture"  bson:"picture"`
+	ImageURL string             `json:"picture"  bson:"picture"`
 }

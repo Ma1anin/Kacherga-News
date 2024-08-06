@@ -16,6 +16,10 @@ import (
 var cloud *cloudinary.Cloudinary
 var err error
 
+func NewFileName() string {
+	return fmt.Sprintf("%x", sha256.Sum256([]byte(time.Now().String())))
+}
+
 func ConnectToImageStorage() {
 	cloud, err = cloudinary.New()
 	if err != nil {
@@ -30,7 +34,7 @@ func UploadImageToStore(f *multipart.FileHeader) (string, error) {
 	}
 	defer file.Close()
 
-	fileName := fmt.Sprintf("%x", sha256.Sum256([]byte(time.Now().String())))
+	fileName := NewFileName()
 	
 	resp, err := cloud.Upload.Upload(context.TODO(), file, uploader.UploadParams{
         PublicID:       fileName,

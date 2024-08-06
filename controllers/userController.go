@@ -16,6 +16,8 @@ import (
 	"github.com/cortezzIP/Kacherga-News/models"
 )
 
+const cookieMaxAge = 3600*24*3
+
 func Signup(c *gin.Context) {
 	var newUser models.User
 
@@ -41,7 +43,7 @@ func Signup(c *gin.Context) {
 	}
 
 	newUser.ID = primitive.NewObjectID()
-	newUser.Picture = "default.png"
+	newUser.ImageURL = "default.png"
 	newUser.Role = "user"
 
 	hash, err := bcrypt.GenerateFromPassword([]byte(newUser.Password), 10)
@@ -116,7 +118,7 @@ func Login(c *gin.Context) {
 	}
 
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", tokenString, 3600*24*3, "", "", false, true)
+	c.SetCookie("Authorization", tokenString, cookieMaxAge, "", "", false, true)
 
 	c.JSON(http.StatusOK, gin.H{})
 }

@@ -86,6 +86,7 @@ func CreateNews(c *gin.Context) {
 	}
 
 	imageURL, err := initializers.UploadImageToStore(file)
+	
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to add file to storage: " + err.Error(),
@@ -97,8 +98,9 @@ func CreateNews(c *gin.Context) {
 	user, _ := c.Get("user")
 
 	newNews.ID = primitive.NewObjectID()
-	newNews.AuthorLogin = user.(models.User).Login
-	newNews.Picture = imageURL
+	newNews.Author.Login = user.(models.User).Login
+	newNews.Author.ImageURL = user.(models.User).ImageURL
+	newNews.ImageURL = imageURL
 	newNews.CreatedAt = time.Now()
 
 	result, err := collection.InsertOne(context.TODO(), newNews)
