@@ -43,7 +43,7 @@ func Signup(c *gin.Context) {
 	}
 
 	newUser.ID = primitive.NewObjectID()
-	newUser.ImageURL = "default.png"
+	newUser.ImageURL = "https://res.cloudinary.com/ddmrmjewm/image/upload/v1723101640/default.png"
 	newUser.Role = "user"
 
 	hash, err := bcrypt.GenerateFromPassword([]byte(newUser.Password), 10)
@@ -145,6 +145,16 @@ func UpdateUser(c *gin.Context) {
 
 		return
 	}
+
+	updateNewsQuery := bson.D{{Key: "$set", Value: bson.D{{Key: "author.imageURL", Value: updateData["imageURL"]}}}}
+    filterForNews := bson.D{{Key: "author.login", Value: user.(models.User).Login}}
+    _, err = collection.UpdateMany(context.TODO(), filterForNews, updateNewsQuery)
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{
+            "error": "Failed to update related news",
+        })
+        return
+    }
 
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", "", -1, "", "", false, true)
