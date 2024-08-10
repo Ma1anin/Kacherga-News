@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"os"
@@ -9,11 +8,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 
-	"github.com/cortezzIP/Kacherga-News/initializers"
-	"github.com/cortezzIP/Kacherga-News/models"
+	"github.com/cortezzIP/Kacherga-News/internal/database"
 )
 
 func RequireAuth(c *gin.Context) {
@@ -22,9 +18,9 @@ func RequireAuth(c *gin.Context) {
 		c.AbortWithStatus(http.StatusUnauthorized)
 	}
 
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+	token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
 
 		return []byte(os.Getenv("SECRET_JWT_KEY")), nil
@@ -35,12 +31,9 @@ func RequireAuth(c *gin.Context) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 		}
 
-		var user models.User
-		collection := initializers.DB.Collection("users")
-		filter := bson.D{{"login", claims["sub"]}}
-
-		collection.FindOne(context.TODO(), filter).Decode(&user)
-		if user.ID == primitive.NilObjectID {
+		repo := database.NewMongoUserRepository()
+		user, err := repo.GetUserByLogin(claims["sub"].(string))
+		if err != nil {
 			c.AbortWithStatus(http.StatusUnauthorized)
 		}
 
