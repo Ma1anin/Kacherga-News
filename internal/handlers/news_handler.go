@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -45,8 +44,6 @@ func CreateNews(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
-
-    log.Println(news)
 
 	user, _ := c.Get("user")
     repo := database.NewMongoNewsRepository()

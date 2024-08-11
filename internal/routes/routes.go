@@ -30,12 +30,12 @@ func SetupRoutes() *gin.Engine {
 	router.PUT("/event/:id", middleware.RequireAuth, handlers.UpdateEvent)
 	router.DELETE("/event/:id", middleware.RequireAuth, handlers.DeleteEvent)
 
+	router.GET("/validate", middleware.RequireAuth, handlers.Validate)
 	router.POST("/signup", handlers.Signup)
 	router.POST("/login", handlers.Login)
 	router.POST("/logout", middleware.RequireAuth, handlers.Logout)
-	router.PUT("/userUpdate", middleware.RequireAuth, handlers.UpdateUser)
-	router.DELETE("/deleteUpdate", middleware.RequireAuth, handlers.UpdateUser)
-	router.GET("/validate", middleware.RequireAuth, handlers.Validate)
+	router.PUT("/updateAccount", middleware.RequireAuth, handlers.UpdateUser)
+	router.DELETE("/deleteAccount", middleware.RequireAuth, handlers.DeleteUserByID)
 
 	return r
 }

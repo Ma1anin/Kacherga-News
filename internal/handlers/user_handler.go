@@ -93,11 +93,16 @@ func UpdateUser(c *gin.Context) {
 	user, _ := c.Get("user")
 
 	repo := database.NewMongoUserRepository()
-	err := repo.UpdateUser(user.(models.User).ID, updateData)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
+	if userPtr, ok := user.(*models.User); ok {
+        err := repo.UpdateUser(userPtr.ID, updateData)
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Error update user"})
+            return
+        }
+    } else {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user type"})
+        return
+    }
 
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", "", -1, "", "", false, true)
@@ -106,20 +111,20 @@ func UpdateUser(c *gin.Context) {
 }
 
 func DeleteUserByID(c *gin.Context) {
-	objId, err := primitive.ObjectIDFromHex(c.Param("id"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "ID is invalid"})
-		return
-	}
+	user, _ := c.Get("user")
 
 	repo := database.NewMongoUserRepository()
-	err = repo.DeleteUserByID(objId)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
+	if userPtr, ok := user.(*models.User); ok {
+        err := repo.DeleteUserByID(userPtr.ID)
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Error delete user"})
+            return
+        }
+    } else {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user type"})
+        return
+    }
 
-	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", "", -1, "", "", false, true)
 
 	c.JSON(http.StatusOK, gin.H{})
@@ -130,6 +135,5 @@ func Validate(c *gin.Context) {
 }
 
 func Logout(c *gin.Context) {
-	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", "", -1, "", "", false, true)
 }
