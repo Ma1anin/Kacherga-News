@@ -10,6 +10,6 @@ var Config struct {
 
 func LoadConfig() {
 	Config.ServerAddress = os.Getenv("SERVER_ADDR")
-	Config.DBURI = os.Getenv("DBURL")
+	Config.DBURI = os.Getenv("DB_URI")
 	Config.ImageStorageURL = os.Getenv("CLOUDINARY_URI")
 }

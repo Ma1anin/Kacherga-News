@@ -25,8 +25,8 @@ type MongoEventRepository struct {
 }
 
 type NewEventData struct {
-	Title   string
-	Content string
+	Title   string `json:"title"`
+	Content string `json:"content"`
 }
 
 func NewMongoEventRepository() *MongoEventRepository {
@@ -68,7 +68,7 @@ func (repo MongoEventRepository) CreateEvent(user models.User, newEventData NewE
 	newEvent.AuthorLogin = user.Login
 	newEvent.Title = newEventData.Title
 	newEvent.Content = newEventData.Content
-	newEvent.CreatedAt = time.Now()
+	newEvent.CreatedAt = time.Now().Format("January 02, 2006 15:04")
 
 	_, err := repo.collection.InsertOne(context.TODO(), newEvent)
 	if err != nil {

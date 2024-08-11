@@ -47,9 +47,14 @@ func CreateEvent(c *gin.Context) {
 
 	user, _ := c.Get("user")
     repo := database.NewMongoEventRepository()
-    err := repo.CreateEvent(user.(models.User), event)
-    if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating event"})
+    if userPtr, ok := user.(*models.User); ok {
+        err := repo.CreateEvent(*userPtr, event)
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating event"})
+            return
+        }
+    } else {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user type"})
         return
     }
 

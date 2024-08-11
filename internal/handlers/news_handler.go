@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -45,11 +46,18 @@ func CreateNews(c *gin.Context) {
         return
     }
 
+    log.Println(news)
+
 	user, _ := c.Get("user")
     repo := database.NewMongoNewsRepository()
-    err := repo.CreateNews(user.(models.User), news)
-    if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating news"})
+    if userPtr, ok := user.(*models.User); ok {
+        err := repo.CreateNews(*userPtr, news)
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating news"})
+            return
+        }
+    } else {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user type"})
         return
     }
 

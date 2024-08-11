@@ -24,9 +24,9 @@ type MongoUserRepository struct {
 }
 
 type NewUserData struct {
-	Login    string
-	FullName string
-	Password string
+	Login    string `json:"login"`
+	FullName string `json:"fullName"`
+	Password string `json:"password"`
 }
 
 func NewMongoUserRepository() *MongoUserRepository {

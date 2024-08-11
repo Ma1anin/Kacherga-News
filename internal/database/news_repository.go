@@ -25,9 +25,9 @@ type MongoNewsRepository struct {
 }
 
 type NewNewsData struct {
-	Title             string
-	Content           string
-	ImageBase64string string
+	Title             string `json:"title"`
+	Content           string `json:"content"`
+	ImageBase64string string `json:"imageBase64String"`
 }
 
 var cloudinaryRepo = CloudinaryImageRepository{
@@ -66,6 +66,7 @@ func (repo MongoNewsRepository) GetNewsByID(id primitive.ObjectID) (*models.News
 }
 
 func (repo MongoNewsRepository) CreateNews(user models.User, newNewsData NewNewsData) error {
+	cloudinaryRepo := NewImageStorage()
 	imageURL, err := cloudinaryRepo.UploadImageToStorage(newNewsData.ImageBase64string)
 	if err != nil {
 		return errors.New("Failed to add file to storage: " + err.Error())
@@ -79,7 +80,7 @@ func (repo MongoNewsRepository) CreateNews(user models.User, newNewsData NewNews
 	newNews.Author.Login = user.Login
 	newNews.Author.ImageURL = user.ImageURL
 	newNews.ImageURL = imageURL
-	newNews.CreatedAt = time.Now()
+	newNews.CreatedAt = time.Now().Format("January 02, 2006 15:04")
 
 	_, err = repo.collection.InsertOne(context.TODO(), newNews)
 	if err != nil {

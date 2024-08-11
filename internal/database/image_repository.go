@@ -19,6 +19,12 @@ type CloudinaryImageRepository struct {
 	ImageStorageClient *cloudinary.Cloudinary
 }
 
+func NewImageStorage() *CloudinaryImageRepository {
+	return &CloudinaryImageRepository{
+		ImageStorageClient: ImageStorageClient,
+	}
+}
+
 func (repo CloudinaryImageRepository) UploadImageToStorage(base64String string) (string, error) {
 	fileName := utils.NewFileName()
 

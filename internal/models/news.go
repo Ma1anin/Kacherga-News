@@ -1,10 +1,7 @@
 package models
 
-import (
-	"time"
+import "go.mongodb.org/mongo-driver/bson/primitive"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
-)
 
 type Author struct {
 	Login    string
@@ -16,6 +13,6 @@ type News struct {
 	Title     string             `json:"title"     bson:"title"`
 	Content   string             `json:"content"   bson:"content"`
 	ImageURL  string             `json:"imageURL"  bson:"imageURL"`
-	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
+	CreatedAt string             `json:"createdAt" bson:"createdAt"`
 	Author    Author             `json:"author"    bson:"author"`
 }
